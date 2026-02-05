@@ -1,13 +1,39 @@
 /* Import Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&display=swap');
 
-/* --- Variables & Base Styles --- */
+/* --- Root Color System --- */
 :root {
-    --riot-red: #d13639;
-    --riot-red-hover: #b02a2d;
-    --riot-black: #111111;
-    --text-white: #ffffff;
-    --nav-bg-gradient: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+    /* Brand Colors */
+    --riot-red:           #d13639;
+    --riot-red-hover:     #b02a2d;
+
+    /* Backgrounds */
+    --bg-main:            #111111;
+    --bg-card:            #1f1f1f;
+    --bg-card-hover:      #292929;
+    --bg-overlay:         #00000033; /* 20% Opacity Black */
+    --bg-promo-fallback:  #222222;
+
+    /* UI & Surface Colors */
+    --ui-gray-base:       #292929;
+    --ui-gray-hover:      #3e3e3e;
+    --scrollbar-track:    #111111;
+    --scrollbar-thumb:    #333333;
+
+    /* Text Colors */
+    --text-white:         #ffffff;
+    --text-gray:          #888888;
+    --text-placeholder:   #ffffffb3; /* 70% Opacity White */
+
+    /* Glass/Transparent Utilities */
+    --glass-10:           #ffffff1a; /* 10% Opacity White */
+    --glass-20:           #ffffff33; /* 20% Opacity White */
+    --divider-color:      #ffffff33; 
+
+    /* Navigation Specific */
+    --nav-bg-start:       #000000cc; /* 80% Opacity Black */
+    --nav-bg-hover:       #000000e6; /* 90% Opacity Black */
+    --nav-gradient:       linear-gradient(to bottom, var(--nav-bg-start), transparent);
 }
 
 * {
@@ -18,8 +44,26 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Oswald', sans-serif;
-    background-color: var(--riot-black);
+    background-color: var(--bg-main);
     color: var(--text-white);
+}
+
+/* --- Custom Scrollbar --- */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--riot-red);
 }
 
 /* --- Navbar Styles --- */
@@ -32,12 +76,12 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: var(--nav-bg-gradient);
+    background: var(--nav-gradient);
     transition: background-color 0.3s ease;
 }
 
 .riot-navbar:hover {
-    background-color: rgba(0,0,0,0.9);
+    background-color: var(--nav-bg-hover);
 }
 
 /* Left Section */
@@ -67,7 +111,7 @@ body {
     display: none;
     height: 1.5rem;
     width: 1px;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: var(--divider-color);
     border-radius: 4px;
 }
 
@@ -123,7 +167,7 @@ body {
 .globe-btn {
     background: transparent;
     border: none;
-    color: white;
+    color: var(--text-white);
     font-size: 1.2rem;
     width: 2.5rem;
     height: 2.5rem;
@@ -136,7 +180,7 @@ body {
 }
 
 .globe-btn:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: var(--glass-10);
 }
 
 /* Search Bar */
@@ -146,11 +190,11 @@ body {
 }
 
 .search-input {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: var(--glass-10);
     border: 1px solid transparent;
     border-radius: 50px;
     padding: 0.5rem 2.5rem 0.5rem 1rem;
-    color: white;
+    color: var(--text-white);
     font-size: 0.75rem;
     font-weight: bold;
     letter-spacing: 0.05em;
@@ -160,11 +204,11 @@ body {
 }
 
 .search-input::placeholder {
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--text-placeholder);
 }
 
 .search-input:focus {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: var(--glass-20);
 }
 
 .search-icon {
@@ -172,13 +216,13 @@ body {
     right: 1rem;
     top: 50%;
     transform: translateY(-50%);
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--text-placeholder);
     pointer-events: none;
 }
 
 .signin-btn {
     background-color: var(--riot-red);
-    color: white;
+    color: var(--text-white);
     text-decoration: none;
     font-size: 11px;
     font-weight: bold;
@@ -220,19 +264,32 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: var(--bg-overlay);
     z-index: 10;
 }
 
+/* --- Promo Section (Placeholder from previous request) --- */
+.promo-section {
+    position: relative;
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-promo-fallback);
+    overflow: hidden;
+}
+/* Note: Add specific .promo-bg and .promo-content styles here if implementing that section */
+
 /* --- News Section --- */
 .news-section {
-    background-color: #111; /* Matches main bg */
+    background-color: var(--bg-main);
     padding: 4rem 2rem;
-    color: white;
+    color: var(--text-white);
 }
 
 .news-container {
-    max-width: 1300px; /* Limits width on huge screens */
+    max-width: 1300px;
     margin: 0 auto;
 }
 
@@ -253,8 +310,8 @@ body {
 }
 
 .see-more-btn {
-    background-color: #292929;
-    color: white;
+    background-color: var(--ui-gray-base);
+    color: var(--text-white);
     text-decoration: none;
     font-size: 11px;
     font-weight: bold;
@@ -266,7 +323,7 @@ body {
 }
 
 .see-more-btn:hover {
-    background-color: #3e3e3e;
+    background-color: var(--ui-gray-hover);
 }
 
 /* Grid Layout */
@@ -288,8 +345,8 @@ body {
     display: flex;
     flex-direction: column;
     text-decoration: none;
-    color: white;
-    background-color: transparent; /* Main image sits on bg */
+    color: var(--text-white);
+    background-color: transparent;
     border-radius: 12px;
     overflow: hidden;
     transition: transform 0.2s;
@@ -315,7 +372,7 @@ body {
 }
 
 .featured-card:hover .featured-img {
-    transform: scale(1.05); /* Slight zoom on hover */
+    transform: scale(1.05);
 }
 
 .featured-title {
@@ -336,17 +393,17 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #1f1f1f;
+    background-color: var(--bg-card);
     padding: 1rem;
     border-radius: 12px;
     text-decoration: none;
-    color: white;
+    color: var(--text-white);
     transition: background 0.3s;
     height: 100%;
 }
 
 .news-item:hover {
-    background-color: #292929;
+    background-color: var(--bg-card-hover);
 }
 
 .news-text {
@@ -379,7 +436,7 @@ body {
     object-fit: cover;
 }
 
-/* Meta Tags (Category Labels) */
+/* Meta Tags */
 .news-meta {
     display: flex;
     align-items: center;
@@ -389,10 +446,10 @@ body {
 .meta-tag {
     font-size: 10px;
     font-weight: bold;
-    color: #888;
+    color: var(--text-gray);
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    background-color: rgba(255,255,255,0.1);
+    background-color: var(--glass-10);
     padding: 2px 6px;
     border-radius: 4px;
 }
