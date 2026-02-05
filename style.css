@@ -46,6 +46,7 @@ body {
     font-family: 'Oswald', sans-serif;
     background-color: var(--bg-main);
     color: var(--text-white);
+    overflow-x: hidden; /* Prevent horizontal scroll from full-width sections */
 }
 
 /* --- Custom Scrollbar --- */
@@ -268,28 +269,22 @@ body {
     z-index: 10;
 }
 
-/* --- Promo Section (Placeholder from previous request) --- */
-.promo-section {
-    position: relative;
-    width: 100%;
-    height: 80vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--bg-promo-fallback);
-    overflow: hidden;
-}
-/* Note: Add specific .promo-bg and .promo-content styles here if implementing that section */
-
 /* --- News Section --- */
 .news-section {
     background-color: var(--bg-main);
-    padding: 4rem 2rem;
     color: var(--text-white);
+    
+    /* Full Viewport Height Logic */
+    min-height: 100vh; 
+    padding: 6rem 2rem; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
 }
 
 .news-container {
     max-width: 1300px;
+    width: 100%;
     margin: 0 auto;
 }
 
@@ -454,7 +449,117 @@ body {
     border-radius: 4px;
 }
 
-/* Responsive */
+/* --- GAMES SECTION --- */
+.games-section {
+    background-color: var(--bg-main);
+    padding: 2rem 0 5rem 0;
+    overflow: hidden;
+}
+
+.games-header-container {
+    max-width: 1300px;
+    margin: 0 auto 2rem auto;
+    padding: 0 2rem;
+}
+
+/* Carousel Animation: 
+   Total Distance = One full set of cards + gaps
+   (360px Card + 20px Gap) * 7 Cards = 2660px 
+*/
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-2660px); } 
+}
+
+.games-carousel {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 2rem;
+}
+
+.games-track {
+    display: flex;
+    gap: 20px; /* 1.25rem equivalent */
+    /* Total Width = (360 + 20) * 14 total items */
+    width: calc(380px * 14); 
+    /* 60s makes it slow and linear */
+    animation: scroll 60s linear infinite; 
+    padding-left: 2rem; /* Initial offset */
+}
+
+/* Pause on Hover */
+.games-carousel:hover .games-track {
+    animation-play-state: paused;
+}
+
+/* Game Card Style */
+.game-card {
+    position: relative;
+    width: 360px;  /* Wide Card */
+    height: 600px; /* Tall Card */
+    flex-shrink: 0;
+    
+    /* The Skew */
+    transform: skewX(-5deg); 
+    
+    border-radius: 6px;
+    overflow: hidden;
+    text-decoration: none;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    filter: brightness(0.6);
+    background-color: #000;
+    backface-visibility: hidden; 
+}
+
+.game-card:hover {
+    filter: brightness(1.1);
+    /* Lift up + Maintain Skew */
+    transform: skewX(-5deg) translateY(-10px); 
+}
+
+/* Background Image - Counter Skew */
+.game-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Un-skew the image so it doesn't look distorted */
+    transform: skewX(5deg) scale(1.2); 
+    transition: transform 0.3s ease;
+}
+
+/* Logo - Counter Skew & Positioning */
+.game-logo {
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    width: 80%;
+    object-fit: contain;
+    /* Un-skew text/logo */
+    transform: translateX(-50%) skewX(5deg); 
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.8));
+    z-index: 10;
+}
+
+/* Platform Icons (Bottom Right) */
+.game-platforms {
+    position: absolute;
+    bottom: 20px;
+    right: 30px;
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+    /* Un-skew icons so they are straight */
+    transform: skewX(5deg); 
+}
+
+.game-platforms i {
+    color: white;
+    font-size: 1.2rem;
+    opacity: 0.8;
+}
+
+/* Media Queries */
 @media (min-width: 768px) {
     .search-container { display: block; }
 }
@@ -463,4 +568,5 @@ body {
     .nav-divider { display: block; }
     .icon-container { display: block; }
     .nav-links { display: flex; }
+    .news-grid { grid-template-columns: 1.4fr 1fr; }
 }
