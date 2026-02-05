@@ -34,6 +34,11 @@
     --nav-bg-start:       #000000cc; /* 80% Opacity Black */
     --nav-bg-hover:       #000000e6; /* 90% Opacity Black */
     --nav-gradient:       linear-gradient(to bottom, var(--nav-bg-start), transparent);
+
+    /* Hiring Section Colors */
+    --bg-light:           #f9f9f9;
+    --text-dark:          #111111;
+    --stat-box-bg:        #e1e1e1;
 }
 
 * {
@@ -497,7 +502,7 @@ body {
 .game-card {
     position: relative;
     width: 360px;  /* Wide Card */
-    height: 600px; /* Tall Card */
+    height: 700px; /* Tall Card */
     flex-shrink: 0;
     
     /* The Skew */
@@ -557,6 +562,245 @@ body {
     color: white;
     font-size: 1.2rem;
     opacity: 0.8;
+}
+
+/* --- HIRING SECTION --- */
+.hiring-section {
+    position: relative;
+    width: 100%;
+    height: 700px;
+    overflow: hidden;
+    background-color: var(--bg-main);
+}
+
+.hiring-img-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60%;
+    height: 100%;
+    z-index: 0;
+}
+
+.hiring-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* The Diagonal White Background Content Area */
+.hiring-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 55%; 
+    height: 100%;
+    background-color: var(--bg-light);
+    z-index: 10;
+    /* Create the diagonal slice */
+    clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-right: 15%; 
+}
+
+.hiring-inner {
+    max-width: 500px;
+    text-align: center;
+    color: var(--text-dark);
+}
+
+.hiring-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 0 0 1rem 0;
+    letter-spacing: -1px;
+}
+
+.hiring-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+    color: #444;
+}
+
+/* Hiring Stats Box */
+.hiring-stats-box {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--stat-box-bg);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 2.5rem;
+    width: 100%;
+}
+
+.stat-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-num {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #666;
+    margin-top: 5px;
+}
+
+.stat-divider-line {
+    width: 1px;
+    height: 50px;
+    background-color: #bbb;
+}
+
+.hiring-btn {
+    display: inline-block;
+    background-color: var(--riot-red);
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 1rem 2.5rem;
+    border-radius: 12px;
+    letter-spacing: 0.05em;
+    transition: background-color 0.3s;
+}
+
+.hiring-btn:hover {
+    background-color: var(--riot-red-hover);
+}
+
+/* --- FOOTER --- */
+.riot-footer {
+    background-color: #111;
+    color: #f0f0f0;
+    padding: 3rem 2rem;
+    font-family: 'Oswald', sans-serif;
+    border-top: 1px solid #333;
+}
+
+.footer-container {
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid #333;
+}
+
+.footer-logo {
+    width: 100px;
+    filter: invert(1);
+    opacity: 0.8;
+    transition: opacity 0.3s;
+}
+
+.footer-logo:hover {
+    opacity: 1;
+}
+
+.footer-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem 2rem;
+    max-width: 700px;
+}
+
+.footer-nav li a {
+    text-decoration: none;
+    color: #999;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: color 0.3s;
+}
+
+.footer-nav li a:hover {
+    color: white;
+}
+
+.footer-socials {
+    display: flex;
+    gap: 1rem;
+}
+
+.footer-socials a {
+    color: white;
+    font-size: 1.2rem;
+    background-color: #2a2a2a;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+}
+
+.footer-socials a:hover {
+    background-color: #444;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 2rem;
+}
+
+.footer-legal-text {
+    font-size: 0.75rem;
+    color: #666;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.footer-legal-text a {
+    color: #666;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+.footer-legal-text a:hover { color: #999; }
+
+.scroll-top-btn {
+    text-decoration: none;
+    color: #f0f0f0;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    background-color: #2a2a2a;
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.3s;
+}
+
+.scroll-top-btn:hover {
+    background-color: #444;
 }
 
 /* Media Queries */
