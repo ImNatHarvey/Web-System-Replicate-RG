@@ -666,13 +666,177 @@ body {
     background-color: var(--riot-red-hover);
 }
 
+/* --- Who We Are: Values Page Interactive Layout --- */
+
+/* 1. Layout Adjustments */
+.values-hero {
+    height: 70vh; /* Reduced height to match reference */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* 2. Center Text Content (The Titles) */
+.values-center-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20; /* Ensure it is above the overlay */
+    text-align: center;
+    width: 90%;
+    max-width: 900px;
+    display: none; /* Hidden by default, toggled by radio logic */
+    animation: fadeIn 0.5s ease;
+}
+
+.values-subtitle {
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-white);
+    opacity: 0.9;
+    display: block; /* Ensure visibility */
+}
+
+.values-title {
+    font-size: 5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 0 0 1.5rem 0;
+    line-height: 0.9;
+    color: var(--text-white);
+}
+
+.values-description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-white);
+    max-width: 650px;
+    margin: 0 auto;
+    font-weight: 400;
+}
+
+/* 3. Values Navigation Overlay */
+.values-nav {
+    position: absolute;
+    bottom: 3rem; /* Position at bottom of hero */
+    left: 0;
+    width: 100%;
+    z-index: 30;
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    padding: 0 2rem;
+}
+
+.v-nav-item {
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    padding-bottom: 5px;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 3px solid transparent;
+}
+
+.v-nav-item:hover {
+    color: var(--text-white);
+}
+
+/* 4. Detail Grids Styling (Below Hero) */
+.values-details-grid {
+    display: none; /* Hidden by default */
+    position: relative;
+    width: 100%;
+    background-color: var(--bg-main);
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    padding: 4rem 10%;
+    z-index: 5;
+    animation: fadeIn 0.5s ease;
+    border-top: 1px solid var(--ui-gray-base);
+}
+
+.v-detail h4 {
+    color: var(--text-white);
+    font-size: 1.2rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+.v-detail p {
+    color: var(--text-gray);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* 5. Radio Button Logic (The Brains) */
+.tab-logic {
+    display: none; /* Hide the actual radio inputs */
+}
+
+/* Show correct content inside header */
+#tab1:checked ~ header .content-01,
+#tab2:checked ~ header .content-02,
+#tab3:checked ~ header .content-03,
+#tab4:checked ~ header .content-04,
+#tab5:checked ~ header .content-05 {
+    display: block;
+}
+
+/* Show correct details grid below header */
+#tab1:checked ~ .grid-01,
+#tab2:checked ~ .grid-02,
+#tab3:checked ~ .grid-03,
+#tab4:checked ~ .grid-04,
+#tab5:checked ~ .grid-05 {
+    display: grid;
+}
+
+/* Highlight active navigation item inside header */
+#tab1:checked ~ header .values-nav .item-01,
+#tab2:checked ~ header .values-nav .item-02,
+#tab3:checked ~ header .values-nav .item-03,
+#tab4:checked ~ header .values-nav .item-04,
+#tab5:checked ~ header .values-nav .item-05 {
+    color: var(--text-white);
+    border-bottom: 3px solid var(--riot-red);
+}
+
+/* 6. Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); } /* Simplified transform for grid */
+}
+
+.values-center-content {
+    /* Override animation for centered content to maintain centering */
+    animation: fadeInCenter 0.5s ease;
+}
+
+@keyframes fadeInCenter {
+    from { opacity: 0; transform: translate(-50%, -45%); }
+    to { opacity: 1; transform: translate(-50%, -50%); }
+}
+
+
 /* --- Footer --- */
 .riot-footer {
-    background-color: #111;
+    background-color: var(--bg-main);
     color: #f0f0f0;
     padding: 3rem 2rem;
     font-family: 'Oswald', sans-serif;
-    border-top: 1px solid #333;
+    border-top: 1px solid var(--ui-gray-base);
 }
 
 .footer-container {
@@ -687,7 +851,7 @@ body {
     flex-wrap: wrap;
     gap: 2rem;
     padding-bottom: 3rem;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid var(--ui-gray-base);
 }
 
 .footer-logo {
@@ -713,7 +877,7 @@ body {
 
 .footer-nav li a {
     text-decoration: none;
-    color: #999;
+    color: var(--text-gray);
     font-size: 0.8rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -722,7 +886,7 @@ body {
 }
 
 .footer-nav li a:hover {
-    color: white;
+    color: var(--text-white);
 }
 
 .footer-socials {
@@ -731,9 +895,9 @@ body {
 }
 
 .footer-socials a {
-    color: white;
+    color: var(--text-white);
     font-size: 1.2rem;
-    background-color: #2a2a2a;
+    background-color: var(--ui-gray-base);
     width: 40px;
     height: 40px;
     border-radius: 10px;
@@ -744,7 +908,7 @@ body {
 }
 
 .footer-socials a:hover {
-    background-color: #444;
+    background-color: var(--ui-gray-hover);
 }
 
 .footer-bottom {
@@ -756,13 +920,13 @@ body {
 
 .footer-legal-text {
     font-size: 0.75rem;
-    color: #666;
+    color: var(--text-gray);
     display: flex;
     gap: 1.5rem;
 }
 
 .footer-legal-text a {
-    color: #666;
+    color: var(--text-gray);
     text-decoration: none;
     transition: color 0.3s;
 }
@@ -774,7 +938,7 @@ body {
     font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
-    background-color: #2a2a2a;
+    background-color: var(--ui-gray-base);
     padding: 0.8rem 1.2rem;
     border-radius: 8px;
     display: flex;
@@ -784,7 +948,7 @@ body {
 }
 
 .scroll-top-btn:hover {
-    background-color: #444;
+    background-color: var(--ui-gray-hover);
 }
 
 /* Media Queries */
@@ -797,147 +961,12 @@ body {
     .icon-container { display: block; }
     .nav-links { display: flex; }
     .news-grid { grid-template-columns: 1.4fr 1fr; }
+    
+    .values-details-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
 }
 
-/* --- Who We Are: Values Page Interactive Layout --- */
-
-/* 1. Layout Adjustments */
-.values-hero {
-    height: 70vh; /* Replicates the shorter hero look */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    overflow: visible; /* Allows grids to show below the header */
-}
-
-.values-center-content {
-    position: relative;
-    z-index: 10;
-    text-align: center;
-    max-width: 800px;
-    margin-top: -50px;
-    display: none; /* Hidden by default, shown by logic below */
-    animation: fadeIn 0.5s ease;
-}
-
-.values-subtitle {
-    font-size: 1.25rem;
-    letter-spacing: 0.2em;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-    text-transform: uppercase;
-}
-
-.values-title {
-    font-size: 5rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    margin: 0 0 1rem 0;
-    line-height: 1;
-}
-
-.values-description {
-    font-size: 1.1rem;
-    line-height: 1.5;
-    color: var(--text-white);
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-/* 2. Values Navigation Overlay */
-.values-nav {
-    position: absolute;
-    bottom: 80px;
-    z-index: 10;
-    display: flex;
-    gap: 2rem;
-}
-
-.v-nav-item {
-    color: rgba(255,255,255,0.5);
-    font-size: 13px;
-    font-weight: 700;
-    cursor: pointer;
-    padding-bottom: 8px;
-    transition: 0.3s;
-    text-transform: uppercase;
-    border-bottom: 2px solid transparent;
-}
-
-.v-nav-item:hover {
-    color: white;
-}
-
-/* 3. Detail Grids Styling */
-.values-details-grid {
-    display: none; /* Hidden by default */
-    position: absolute;
-    top: 90%; /* Positions exactly below the hero header */
-    left: 0;
-    width: 100%;
-    background-color: #000;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 3rem;
-    padding: 5rem 10%;
-    z-index: 5;
-    animation: fadeIn 0.5s ease;
-}
-
-.v-detail h4 {
-    color: white;
-    font-size: 1.25rem;
-    margin-bottom: 1rem;
-    text-transform: capitalize;
-}
-
-.v-detail p {
-    color: #888;
-    font-size: 0.9rem;
-    line-height: 1.6;
-}
-
-/* 4. Radio Button Logic */
-.tab-logic {
-    display: none; /* Hide the actual radio inputs */
-}
-
-/* Show correct content and grid when a specific radio is checked */
-#tab1:checked ~ .content-01, #tab1:checked ~ .grid-01,
-#tab2:checked ~ .content-02, #tab2:checked ~ .grid-02,
-#tab3:checked ~ .content-03, #tab3:checked ~ .grid-03,
-#tab4:checked ~ .content-04, #tab4:checked ~ .grid-04,
-#tab5:checked ~ .content-05, #tab5:checked ~ .grid-05 {
-    display: block;
-}
-
-/* Ensure detail sections use grid layout when visible */
-#tab1:checked ~ .grid-01,
-#tab2:checked ~ .grid-02,
-#tab3:checked ~ .grid-03,
-#tab4:checked ~ .grid-04,
-#tab5:checked ~ .grid-05 {
-    display: grid;
-}
-
-/* Highlight active navigation item */
-#tab1:checked ~ .values-nav .item-01,
-#tab2:checked ~ .values-nav .item-02,
-#tab3:checked ~ .values-nav .item-03,
-#tab4:checked ~ .values-nav .item-04,
-#tab5:checked ~ .values-nav .item-05 {
-    color: white;
-    border-bottom: 2px solid var(--riot-red);
-}
-
-/* 5. Animations */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Responsive adjustments */
 @media (max-width: 1024px) {
     .values-details-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -955,5 +984,9 @@ body {
         gap: 1rem;
         flex-wrap: wrap;
         justify-content: center;
+        bottom: 1rem;
+    }
+    .values-title {
+        font-size: 2.5rem;
     }
 }
