@@ -892,6 +892,218 @@ body {
     }
 }
 
+.game-expansion-section {
+    width: 100%;
+    height: 800px; /* Fixed height for the banner section */
+    overflow: hidden;
+    background-color: #000;
+}
+
+.acc-logic {
+    display: none;
+}
+
+.acc-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.acc-card {
+    position: relative;
+    flex: 1; /* Collapsed state width */
+    height: 100%;
+    cursor: pointer;
+    transition: flex 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    overflow: hidden;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.acc-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.4) grayscale(100%);
+    transition: filter 0.6s ease;
+}
+
+/* Collapsed Content Styling */
+.acc-collapsed-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 3rem 0;
+    z-index: 5;
+    transition: opacity 0.3s ease;
+}
+
+.acc-mini-icon {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    margin-bottom: 2rem;
+    filter: invert(1);
+    opacity: 0.8;
+}
+
+.acc-game-name {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--text-white);
+    text-transform: uppercase;
+    white-space: nowrap;
+    margin-bottom: 2rem;
+}
+
+.acc-plus {
+    width: 30px;
+    height: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-white);
+    font-size: 10px;
+}
+
+/* Expanded Content Styling */
+.acc-expanded-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0,0,0,0.8), transparent 70%);
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease 0.2s; /* Delays appearance until expanded */
+    z-index: 10;
+}
+
+.acc-expanded-logo {
+    max-width: 300px;
+    margin-bottom: 2rem;
+    filter: drop-shadow(0 0 20px rgba(0,0,0,0.5));
+}
+
+.acc-description {
+    max-width: 450px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    color: var(--text-white);
+}
+
+.acc-btn {
+    background-color: var(--riot-red);
+    color: var(--text-white);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    transition: background 0.3s;
+}
+
+/* Expansion Logic */
+#game1:checked ~ .acc-container .card-lol,
+#game2:checked ~ .acc-container .card-val,
+#game3:checked ~ .acc-container .card-tft,
+#game4:checked ~ .acc-container .card-wr,
+#game5:checked ~ .acc-container .card-lor,
+#game6:checked ~ .acc-container .card-2xko,
+#game7:checked ~ .acc-container .card-rift {
+    flex: 6; /* Expansion factor */
+    cursor: default;
+}
+
+#game1:checked ~ .acc-container .card-lol .acc-bg,
+#game2:checked ~ .acc-container .card-val .acc-bg,
+#game3:checked ~ .acc-container .card-tft .acc-bg,
+#game4:checked ~ .acc-container .card-wr .acc-bg,
+#game5:checked ~ .acc-container .card-lor .acc-bg,
+#game6:checked ~ .acc-container .card-2xko .acc-bg,
+#game7:checked ~ .acc-container .card-rift .acc-bg {
+    filter: brightness(0.8) grayscale(0%);
+}
+
+#game1:checked ~ .acc-container .card-lol .acc-collapsed-content,
+#game2:checked ~ .acc-container .card-val .acc-collapsed-content,
+#game3:checked ~ .acc-container .card-tft .acc-collapsed-content,
+#game4:checked ~ .acc-container .card-wr .acc-collapsed-content,
+#game5:checked ~ .acc-container .card-lor .acc-collapsed-content,
+#game6:checked ~ .acc-container .card-2xko .acc-collapsed-content,
+#game7:checked ~ .acc-container .card-rift .acc-collapsed-content {
+    opacity: 0;
+}
+
+#game1:checked ~ .acc-container .card-lol .acc-expanded-content,
+#game2:checked ~ .acc-container .card-val .acc-expanded-content,
+#game3:checked ~ .acc-container .card-tft .acc-expanded-content,
+#game4:checked ~ .acc-container .card-wr .acc-expanded-content,
+#game5:checked ~ .acc-container .card-lor .acc-expanded-content,
+#game6:checked ~ .acc-container .card-2xko .acc-expanded-content,
+#game7:checked ~ .acc-container .card-rift .acc-expanded-content {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Responsive Accordion */
+@media (max-width: 1024px) {
+    .game-expansion-section {
+        height: auto;
+    }
+    .acc-container {
+        flex-direction: column;
+    }
+    .acc-card {
+        height: 150px;
+        transition: height 0.6s ease;
+    }
+    .acc-collapsed-content {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0 2rem;
+    }
+    .acc-game-name {
+        writing-mode: horizontal-tb;
+        transform: none;
+        margin-bottom: 0;
+    }
+    .acc-mini-icon { margin-bottom: 0; }
+    
+    #game1:checked ~ .acc-container .card-lol,
+    #game2:checked ~ .acc-container .card-val,
+    #game3:checked ~ .acc-container .card-tft,
+    #game4:checked ~ .acc-container .card-wr,
+    #game5:checked ~ .acc-container .card-lor,
+    #game6:checked ~ .acc-container .card-2xko,
+    #game7:checked ~ .acc-container .card-rift {
+        height: 500px;
+        flex: none;
+    }
+}
+
 /* --- Footer --- */
 .riot-footer {
     background-color: var(--bg-main);
